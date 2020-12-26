@@ -1,7 +1,7 @@
-/* Copyright  (C) 2010-2016 The RetroArch team
+/* Copyright  (C) 2010-2020 The RetroArch team
  *
  * ---------------------------------------------------------------------------------------
- * The following license statement only applies to this file (retro_stat.h).
+ * The following license statement only applies to this file (label_sanitization.h).
  * ---------------------------------------------------------------------------------------
  *
  * Permission is hereby granted, free of charge,
@@ -19,45 +19,19 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
-#ifndef __RETRO_STAT_H
-#define __RETRO_STAT_H
-
-#include <stdint.h>
 #include <stddef.h>
-
-#include <retro_common_api.h>
-
 #include <boolean.h>
 
-RETRO_BEGIN_DECLS
+void label_sanitize(char *label, bool (*left)(char*), bool (*right)(char*));
 
-/**
- * path_is_directory:
- * @path               : path
- *
- * Checks if path is a directory.
- *
- * Returns: true (1) if path is a directory, otherwise false (0).
- */
-bool path_is_directory(const char *path);
+void label_remove_parens(char *label);
 
-bool path_is_character_special(const char *path);
+void label_remove_brackets(char *label);
 
-bool path_is_valid(const char *path);
+void label_remove_parens_and_brackets(char *label);
 
-int32_t path_get_size(const char *path);
+void label_keep_region(char *label);
 
-/**
- * path_mkdir_norecurse:
- * @dir                : directory
- *
- * Create directory on filesystem.
- *
- * Returns: true (1) if directory could be created, otherwise false (0).
- **/
-bool mkdir_norecurse(const char *dir);
+void label_keep_disc(char *label);
 
-RETRO_END_DECLS
-
-#endif
+void label_keep_region_and_disc(char *label);
